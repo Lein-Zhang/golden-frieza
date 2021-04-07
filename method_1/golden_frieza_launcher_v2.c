@@ -224,8 +224,8 @@ int main(int argc, char **argv)
 
         /* mark start_address up to end_address as writable */
         n = end_address - start_address;
-
-        if (mprotect((void *)start_address, n, PROT_READ | PROT_WRITE | PROT_EXEC) == -1)
+        int cnt=(rodata_offset)/n;
+        if (mprotect((void *)start_address, (cnt+1)*n, PROT_READ | PROT_WRITE | PROT_EXEC) == -1)
         {
                 fprintf(stderr, "mprotect() error\n");
                 exit(-1);
