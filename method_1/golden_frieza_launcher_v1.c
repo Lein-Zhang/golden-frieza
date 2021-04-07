@@ -206,8 +206,9 @@ int main(int argc, char **argv)
 
         /* mark start_address up to end_address as writable */
         n = end_address - start_address;
+        int count=offset/n;
 
-        if (mprotect((void *)start_address, n, PROT_READ | PROT_WRITE | PROT_EXEC) == -1)
+        if (mprotect((void *)start_address, n*(count+1), PROT_READ | PROT_WRITE | PROT_EXEC) == -1)
         {
                 fprintf(stderr, "mprotect() error\n");
                 exit(-1);
